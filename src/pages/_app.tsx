@@ -1,11 +1,11 @@
-import { GeistSans } from "geist/font/sans";
+import { sen } from '../util/fonts'
 import { type AppType } from "next/app";
 
 import "~/styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <div className={GeistSans.className}>
+    <div className={'${sen.variable}'}>
       <Component {...pageProps} />
     </div>
   );
