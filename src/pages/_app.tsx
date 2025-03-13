@@ -1,13 +1,19 @@
-import { sen } from '../util/fonts'
+import { sen } from "../util/fonts";
 import { type AppType } from "next/app";
+import { ThemeProvider } from "next-themes";
+import { useEffect } from "react";
 
 import "~/styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
+  useEffect(() => {
+    document.documentElement.className = sen.variable;
+  }, []);
+
   return (
-    <div className={'${sen.variable}'}>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <Component {...pageProps} />
-    </div>
+    </ThemeProvider>
   );
 };
 
