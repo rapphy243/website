@@ -3,30 +3,62 @@ import { useEffect, useState } from "react";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 
 const ThemeToggleButton = () => {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { resolvedTheme, theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    
+    // Function to determine theme from localStorage or system preference
+    const detectTheme = () => {
+      // First check localStorage (next-themes stores theme here)
+      const storedTheme = localStorage.getItem('theme');
+      if (storedTheme === 'dark') {
+        setIsDarkMode(true);
+        return;
+      } else if (storedTheme === 'light') {
+        setIsDarkMode(false);
+        return;
+      }
+      
+      // Fall back to system preference if available
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setIsDarkMode(true);
+        return;
+      }
+      
+      // Default to light mode
+      setIsDarkMode(false);
+    };
+    
+    detectTheme();
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
+  // Update isDarkMode whenever resolvedTheme changes
+  useEffect(() => {
+    if (resolvedTheme) {
+      setIsDarkMode(resolvedTheme === 'dark');
+    }
+  }, [resolvedTheme]);
 
-  const toggleTheme = () => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  };
-
+  // Don't render anything until component is mounted on client
+  if (!mounted) return null;
+  
+  // Simple colored icons
+  const sunIconClasses = "h-6 w-6 text-[#ee82ce]";
+  const moonIconClasses = "h-6 w-6 text-[#4D0A4B]";
+  
   return (
     <button
-      onClick={toggleTheme}
-      className="transition-all duration-300 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+      onClick={() => setTheme(isDarkMode ? "light" : "dark")}
+      className="transition-all duration-200 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+      aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
     >
-      {resolvedTheme === "dark" ? (
-        <SunIcon className="h-6 w-6 text-gray-800 dark:text-gray-200" />
+      {isDarkMode ? (
+        <SunIcon className={sunIconClasses} />
       ) : (
-        <MoonIcon className="h-6 w-6 text-gray-800 dark:text-gray-200" />
+        <MoonIcon className={moonIconClasses} />
       )}
     </button>
   );
