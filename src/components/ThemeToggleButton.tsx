@@ -3,19 +3,19 @@ import { useEffect, useState } from "react";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 
 const ThemeToggleButton = () => {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Mount check to prevent hydration mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  // Wait until component is mounted on the client to avoid hydration mismatch
+  useEffect(() => setMounted(true), []);
 
-  // Don't render until client-side to prevent hydration issues
-  if (!mounted) return null;
+  if (!mounted) {
+    // Return a placeholder to avoid hydration mismatch
+    return <div className="w-6 h-6" />;
+  }
   
-  // Simple theme check
-  const isDark = theme === 'dark';
+  // Use resolvedTheme instead of theme for more reliable detection
+  const isDark = resolvedTheme === 'dark';
   
   // Icon styles
   const sunIconClasses = "h-6 w-6 text-[#ee82ce]";
