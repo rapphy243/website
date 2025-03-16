@@ -3,18 +3,10 @@ import { motion } from "framer-motion";
 import { FaYoutube, FaGithub, FaRegAddressCard } from "react-icons/fa";
 import ThemeToggleButton from "../components/ThemeToggleButton";
 import { SocialLink } from "../components/SocialLink";
-import { useTheme } from "next-themes";
-import { useState, useEffect } from "react";
+import { useThemeUtils } from "../util/themeUtils";
 
 export default function Home() {
-  // Add mounted state to prevent hydration mismatch
-  const [mounted, setMounted] = useState(false);
-  const { resolvedTheme } = useTheme();
-
-  // Mount component
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { getThemeClass } = useThemeUtils();
 
   // For fade-in animation when page loads
   const containerVariants = {
@@ -28,14 +20,19 @@ export default function Home() {
     visible: { opacity: 1, transition: { delay: 0.5, duration: 1 } }
   };
 
-  // Apply a placeholder style before client-side hydration
-  const bgClass = mounted && resolvedTheme === 'dark'
-    ? "bg-gradient-to-br from-[#4D0A4B] to-[#03023F]"
-    : "bg-gradient-to-br from-[#ee82ce] to-[#6095ea]";
+  // Apply theme classes using the utility
+  const bgClass = getThemeClass(
+    "bg-gradient-to-br from-[#ee82ce] to-[#6095ea]",
+    "bg-gradient-to-br from-[#4D0A4B] to-[#03023F]"
+  );
 
-  const cardClass = mounted && resolvedTheme === 'dark'
-    ? "bg-[#2e3440] shadow-gray-900"
-    : "bg-[#eceff4]";
+  const cardClass = getThemeClass(
+    "bg-[#eceff4]",
+    "bg-[#2e3440] shadow-gray-900"
+  );
+  
+  const headingClass = getThemeClass('text-black', 'text-[#eceff4]');
+  const textClass = getThemeClass('text-gray-700', 'text-[#eceff4]');
 
   return (
     <>
@@ -46,10 +43,10 @@ export default function Home() {
       </Head>
       <main className={`flex min-h-screen flex-col items-center justify-center ${bgClass} p-4 transition-all duration-300`}>
         <motion.div className={`${cardClass} rounded-2xl shadow-2xl p-10 max-w-md text-left transition-all duration-300`} variants={containerVariants} initial="hidden" animate="visible">
-          <h2 className={`text-2xl font-bold mb-4 ${mounted && resolvedTheme === 'dark' ? 'text-[#eceff4]' : 'text-black'} duration-75`}>
+          <h2 className={`text-2xl font-bold mb-4 ${headingClass} duration-75`}>
             Rapphy243
           </h2>
-          <p className={`${mounted && resolvedTheme === 'dark' ? 'text-[#eceff4]' : 'text-gray-700'} duration-75`}>
+          <p className={`${textClass} duration-75`}>
             Just some random on the internet.
           </p>
           <div className="flex mt-4 space-x-4">
