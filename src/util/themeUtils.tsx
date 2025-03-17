@@ -22,11 +22,22 @@ export function useThemeUtils() {
     return resolvedTheme === 'dark' ? darkClass : lightClass;
   };
 
+  /**
+   * Renders content only when theme is detected
+   * @param renderFn Function that returns content to render when theme is ready
+   * @param placeholder Optional placeholder to show while waiting (defaults to empty div)
+   */
+  const renderWhenThemeReady = (renderFn: () => React.ReactNode, placeholder?: React.ReactNode) => {
+    if (!mounted) return placeholder ?? <div style={{ visibility: 'hidden' }} />;
+    return renderFn();
+  };
+
   return {
     mounted,
     resolvedTheme,
     setTheme,
     getThemeClass,
+    renderWhenThemeReady,
   };
 }
 
