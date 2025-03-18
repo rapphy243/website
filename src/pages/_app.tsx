@@ -11,7 +11,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   }, []);
 
   return (
-    <PlausibleProvider domain="rap.ph" customDomain="https://plausible.rapph.dev">
+    <PlausibleProvider domain="rap.ph" customDomain="https://plausible.rapph.dev" trackOutboundLinks={true} selfHosted={true}>
       <ThemeProvider attribute="class" defaultTheme="system" enableColorScheme>
         <Component {...pageProps} />
       </ThemeProvider>
