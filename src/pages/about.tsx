@@ -1,24 +1,12 @@
 import Head from "next/head";
-import { motion } from "framer-motion";
 import { FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
 import { useThemeUtils } from "../util/themeUtils";
 import PageLayout from "../components/PageLayout";
+import { Card } from "../components/Card";
 
 export default function About() {
   const { getThemeClass } = useThemeUtils();
-
-  // For fade-in animation when page loads
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 1 } }
-  };
-
-  // Get theme-dependent classes
-  const cardClass = getThemeClass(
-    "bg-[#eceff4]",
-    "bg-[#2e3440] shadow-gray-900"
-  );
 
   const textClass = getThemeClass(
     'text-gray-700',
@@ -33,12 +21,7 @@ export default function About() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageLayout>
-        <motion.div 
-          className={`${cardClass} rounded-2xl shadow-2xl p-8 max-w-2xl w-full text-left transition-all duration-300`}
-          variants={containerVariants} 
-          initial="hidden" 
-          animate="visible"
-        >
+        <Card className="max-w-2xl w-full">
           <Link href="/" className={`flex items-center mb-6 ${textClass} hover:text-[#4D0A4B] dark:hover:text-[#ee82ce] transition-colors`}>
             <FaArrowLeft className="mr-2" />
           </Link>
@@ -59,7 +42,7 @@ export default function About() {
               </p>
             </section>
           </div>
-        </motion.div>
+        </Card>
       </PageLayout>
     </>
   );

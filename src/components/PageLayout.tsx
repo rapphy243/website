@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import ThemeToggleButton from "./ThemeToggleButton";
 import { useThemeUtils } from "../util/themeUtils";
+import { buttonFadeInVariants } from "../util/animations";
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -9,12 +10,6 @@ interface PageLayoutProps {
 
 const PageLayout = ({ children }: PageLayoutProps) => {
   const { getThemeClass, renderWhenThemeReady } = useThemeUtils();
-
-  // For theme button animation
-  const buttonVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { delay: 0.5, duration: 1 } }
-  };
 
   return renderWhenThemeReady(() => {
     // Apply theme classes using the utility
@@ -28,7 +23,7 @@ const PageLayout = ({ children }: PageLayoutProps) => {
         {children}
         <motion.div 
           className="fixed bottom-4 right-4"
-          variants={buttonVariants}
+          variants={buttonFadeInVariants}
           initial="hidden"
           animate="visible"
         >
