@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { useThemeUtils } from "../util/themeUtils";
+import { Tooltip } from 'react-tooltip'
 
 interface SocialLinkProps {
   href: string;
@@ -26,10 +27,13 @@ export const SocialLink = ({ href, icon, label, colorClass = "text-gray-700 dark
     <a 
       href={href} 
       title={label} 
-      aria-label={label} 
+      data-tooltip-id={label}
+      data-tooltip-content={label}
+      data-tooltip-place="bottom"
       className={`${processedColorClass} transition-all duration-200 ${hoverColorClass} hover:scale-110 focus:outline-none rounded-full p-1`}
     >
-      {icon}
+      {icon} 
+      <Tooltip id={label}  />
     </a>
   );
 };

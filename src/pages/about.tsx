@@ -5,6 +5,7 @@ import { useThemeUtils } from "../util/themeUtils";
 import PageLayout from "../components/PageLayout";
 import { Card } from "../components/Card";
 
+
 export default function About() {
   const { getThemeClass } = useThemeUtils();
 
