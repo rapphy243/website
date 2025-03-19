@@ -22,7 +22,7 @@ export default function About() {
       </Head>
       <PageLayout>
         <Card className="max-w-2xl w-full">
-          <Link href="/" className={`flex items-center mb-6 ${textClass} hover:text-[#4D0A4B] dark:hover:text-[#ee82ce] transition-colors`}>
+        <Link href="/" className={`flex items-center mb-6 ${textClass} hover:text-[#ee82ce] dark:hover:text-[#4D0A4B] transition-colors`}>
             <FaArrowLeft className="mr-2" />
           </Link>
 
