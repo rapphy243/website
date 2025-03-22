@@ -15,7 +15,7 @@ export default function Home() {
     <>
       <Head>
         <title>Rapphy243</title>
-        <meta name="description" content="Rapphy243" />
+        <meta name="description" content="Rapphy243's Website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageLayout>

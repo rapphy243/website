@@ -23,17 +23,15 @@ export default function About() {
       </Head>
       <PageLayout>
         <Card className="max-w-2xl w-full">
-        <Link href="/" className={`flex items-center mb-6 ${textClass} hover:text-[#ee82ce] dark:hover:text-[#4D0A4B] transition-colors`}>
-            <FaArrowLeft className="mr-2" />
+          <Link href="/" className={`flex items-center mb-6 ${textClass} ${getThemeClass('hover:text-[#4D0A4B]','hover:text-[#ee82ce]')} transition-colors`}>
+            <FaArrowLeft/>
           </Link>
-
           <div className={`space-y-6 ${textClass}`}>
             <section>
               <p>
               <b>Hi, I&apos;m Rapphy243.</b>
               </p>
             </section>
-
             <section>
               <p>
               If you want to contact me you can contact me at <b>im<span className="group relative inline-block">

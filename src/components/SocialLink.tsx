@@ -33,7 +33,13 @@ export const SocialLink = ({ href, icon, label, colorClass = "text-gray-700 dark
       className={`${processedColorClass} transition-all duration-200 ${hoverColorClass} hover:scale-110 focus:outline-none rounded-full p-1`}
     >
       {icon} 
-      <Tooltip id={label}  />
+      <Tooltip 
+        id={label}  
+        className={getThemeClass(
+          "!bg-[#e5e9f0] !text-gray-700 !border-gray-400 !shadow-md",
+          "!bg-[#272e39] !text-[#eceff4] !border-gray-900 !shadow-gray-900"
+        )}
+      />
     </a>
   );
 };
