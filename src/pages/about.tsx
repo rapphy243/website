@@ -23,7 +23,7 @@ export default function About() {
       </Head>
       <PageLayout>
         <Card className="max-w-2xl w-full">
-          <Link href="/" className={`flex items-center mb-6 ${textClass} ${getThemeClass('hover:text-[#4D0A4B]','hover:text-[#ee82ce]')} transition-colors`}>
+          <Link href="/" prefetch={true} className={`flex items-center mb-6 ${textClass} ${getThemeClass('hover:text-[#4D0A4B]','hover:text-[#ee82ce]')} transition-colors`}>
             <FaArrowLeft/>
           </Link>
           <div className={`space-y-6 ${textClass}`}>

@@ -29,7 +29,7 @@ export default function Home() {
           <div className="flex mt-4 space-x-4">
             <SocialLink href="https://github.com/rapphy243" icon={<FaGithub className="w-7 h-7"/>} label="GitHub" />
             <SocialLink href="https://youtube.com/@243" icon={<FaYoutube className="w-7 h-7"/>} label="YouTube" colorClass="text-red-500" />
-            <SocialLink href="./about" icon={<FaRegAddressCard className="w-7 h-7"/>} label="About" />
+            <SocialLink href="./about" prefetch={true} icon={<FaRegAddressCard className="w-7 h-7"/>} label="About" />
           </div>
         </Card>
       </PageLayout>

@@ -1,15 +1,17 @@
 import type { ReactNode } from "react";
 import { useThemeUtils } from "../util/themeUtils";
 import { Tooltip } from 'react-tooltip'
+import Link from 'next/link';
 
 interface SocialLinkProps {
   href: string;
   icon: ReactNode;
   label: string;
+  prefetch?: boolean;
   colorClass?: string;
 }
 
-export const SocialLink = ({ href, icon, label, colorClass = "text-gray-700 dark:text-[#eceff4]" }: SocialLinkProps) => {
+export const SocialLink = ({ href, icon, label, prefetch = false, colorClass = "text-gray-700 dark:text-[#eceff4]" }: SocialLinkProps) => {
   const { getThemeClass } = useThemeUtils();
   
   // Process the color class to handle dark: prefixes
@@ -24,13 +26,14 @@ export const SocialLink = ({ href, icon, label, colorClass = "text-gray-700 dark
   );
 
   return (
-    <a 
+    <Link 
       href={href} 
-      title={label} 
+      prefetch={prefetch}
+      className={`${processedColorClass} transition-all duration-200 ${hoverColorClass} hover:scale-110 focus:outline-none rounded-full p-1`}
+      title={label}
       data-tooltip-id={label}
       data-tooltip-content={label}
       data-tooltip-place="bottom"
-      className={`${processedColorClass} transition-all duration-200 ${hoverColorClass} hover:scale-110 focus:outline-none rounded-full p-1`}
     >
       {icon} 
       <Tooltip 
@@ -40,7 +43,7 @@ export const SocialLink = ({ href, icon, label, colorClass = "text-gray-700 dark
           "!bg-[#272e39] !text-[#eceff4] !border-gray-900 !shadow-gray-900"
         )}
       />
-    </a>
+    </Link>
   );
 };
 
